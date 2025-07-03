@@ -1,6 +1,4 @@
-Sure! Here's a complete `README.md` for your **LAN Real-Time Captions** project, written in Markdown:
 
-```markdown
 # 🎤 LAN Real-Time Captions
 
 A lightweight, fast, and offline-ready real-time speech-to-text captioning system over LAN using **Gradio**, **FastAPI**, and **Faster-Whisper**. Built for local environments, workshops, classrooms, or meetings — where accurate and fast transcriptions are needed without internet dependency.
@@ -19,7 +17,7 @@ A lightweight, fast, and offline-ready real-time speech-to-text captioning syste
 
 ## 🧱 Project Structure
 
-```
+
 
 lan\_realtime\_captions/
 │
@@ -39,7 +37,7 @@ lan\_realtime\_captions/
 ├── run.sh                     # Script to start both frontend and backend
 └── README.md                  # You're here 📄
 
-````
+
 
 ---
 
