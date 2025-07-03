@@ -17,25 +17,21 @@ A lightweight, fast, and offline-ready real-time speech-to-text captioning syste
 
 ## 🧱 Project Structure
 
-
-
-lan\_realtime\_captions/
-│
+lan_realtime_captions/
 ├── backend/
-│   ├── buffer.py              # Caption buffer manager
-│   ├── server.py              # FastAPI server + WebSocket broadcaster
-│   ├── transcriber.py         # Audio transcription using Faster-Whisper
-│   └── requirements.txt       # Backend dependencies
+│   ├── __pycache__/
+│   ├── buffer.py          # Rolling caption buffer
+│   ├── requirements.txt   # Backend dependencies
+│   ├── server.py          # FastAPI server & WebSocket
+│   └── transcriber.py     # Audio transcription logic
 │
 ├── frontend/
-│   ├── frontend.py            # Gradio UI: Speaker & Viewer
-│   ├── saved\_captions/
-│   │   └── database.csv       # Auto-generated CSV of saved captions
-│   └── requirements.txt       # Frontend dependencies
+│   ├── saved_captions/    # Storage for saved captions
+│   ├── frontend.py        # Gradio UI (Speaker + Viewer tabs)
+│   └── requirements.txt   # Frontend dependencies
 │
-├── venv/                      # Python virtual environment (gitignored)
-├── run.sh                     # Script to start both frontend and backend
-└── README.md                  # You're here 📄
+├── venv/                  # Python virtual environment
+└── run.sh                 # Launch script
 
 
 
