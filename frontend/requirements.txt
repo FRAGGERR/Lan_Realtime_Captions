@@ -1,0 +1,7 @@
+gradio
+soundfile
+websockets
+requests
+numpy
+sounddevice
+soundfile

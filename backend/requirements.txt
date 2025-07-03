@@ -1,0 +1,12 @@
+fastapi # The main backend web framework
+uvicorn # ASGI server to run FastAPI
+websockets # For WebSocket support in FastAPI
+pydub # For handling and converting incoming audio formats (WAV/MP3 → raw PCM if needed)
+numpy # Required by whispercpp for audio array handling
+pyaudio
+wave
+python-multipart      # File(...) needs it
+torch>=2.1            # whisper pulls torch; pin to a stable version
+openai-whisper
+soundfile             # needed by whisper on CPU
+faster-whisper # For faster inference
