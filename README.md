@@ -1,151 +1,127 @@
+# 🎙️ LAN Real-Time Captioning System
 
-# 🎤 LAN Real-Time Captions
+This project enables **real-time speech-to-text captioning** over a **local network (LAN)** using a **FastAPI backend** and a **Gradio frontend**.
 
-A lightweight, fast, and offline-ready real-time speech-to-text captioning system over LAN using **Gradio**, **FastAPI**, and **Faster-Whisper**. Built for local environments, workshops, classrooms, or meetings — where accurate and fast transcriptions are needed without internet dependency.
+---
+
+## 🧩 Project Structure
+
+```
+lan_realtime_captions/
+├── backend/
+│   ├── buffer.py
+│   ├── server.py
+│   ├── transcriber.py
+│   └── requirements.txt
+├── frontend/
+│   ├── frontend.py
+│   ├── saved_captions/
+│   └── requirements.txt
+├── run.sh
+├── .gitignore
+└── venv/  (excluded from Git)
+```
 
 ---
 
 ## 🚀 Features
 
-- 🎙️ **Speaker Interface** to capture audio and stream it for real-time transcription
-- 📺 **Viewer Interface** to display captions live via WebSocket
-- ⚡ Uses [Faster-Whisper](https://github.com/guillaumekln/faster-whisper) for fast and efficient transcription
-- 💾 Save and 📂 Clear caption logs to a local CSV file
-- 🌐 Runs on LAN — no cloud, no API keys, full privacy
+- 🎤 **Live microphone streaming** from speaker device
+- 🔁 **WebSocket-based communication** for real-time caption updates
+- 🧠 **FastAPI server** to handle audio chunk transcription
+- 🖥️ **Gradio frontend** to view live captions on the LAN
+- 💾 Option to **save transcribed captions** as `.csv`
 
 ---
 
-## 🧱 Project Structure
+## ⚙️ Setup Instructions
 
-lan_realtime_captions/
-├── backend/
-│   ├── __pycache__/
-│   ├── buffer.py          # Rolling caption buffer
-│   ├── requirements.txt   # Backend dependencies
-│   ├── server.py          # FastAPI server & WebSocket
-│   └── transcriber.py     # Audio transcription logic
-│
-├── frontend/
-│   ├── saved_captions/    # Storage for saved captions
-│   ├── frontend.py        # Gradio UI (Speaker + Viewer tabs)
-│   └── requirements.txt   # Frontend dependencies
-│
-├── venv/                  # Python virtual environment
-└── run.sh                 # Launch script
-
-
-
----
-
-## ⚙️ Installation & Setup
-
-### 1. Clone the repo
+### 1️⃣ Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/lan_realtime_captions.git
 cd lan_realtime_captions
-````
+```
 
-### 2. Create & activate virtual environment
+### 2️⃣ Create and activate virtual environment
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate   # On Windows use `venv\Scripts\activate`
+source venv/bin/activate  # or venv\Scripts\activate on Windows
 ```
 
-### 3. Install dependencies
+### 3️⃣ Install dependencies
 
 ```bash
 pip install -r backend/requirements.txt
 pip install -r frontend/requirements.txt
 ```
 
-> 💡 **Note:** This uses `faster-whisper`, which supports CPU and GPU (optional).
+---
 
-### 4. Run the app
+## ▶️ Running the Project
+
+Simply run the following script:
 
 ```bash
 ./run.sh
 ```
 
-* Backend (FastAPI): [http://localhost:8000](http://localhost:8000)
-* Frontend (Gradio): [http://localhost:7860](http://localhost:7860)
+This will:
+- 🔌 Free up ports `8000` and `7860`
+- 🚀 Start FastAPI backend on `0.0.0.0:8000`
+- 🎛️ Start Gradio frontend on `0.0.0.0:7860`
+- 🧼 Gracefully shut down both servers on exit
 
 ---
 
-## 📦 Backend API
+## 🌐 Access on LAN
 
-* `POST /stream` → Accepts 2-sec audio chunks, returns transcribed text
-* `GET /` → Returns welcome message
-* `POST /transcribe` → (Optional) Accepts full audio files
-* `WS /ws` → WebSocket broadcasting live captions to connected clients
+Once running, any device on the same Wi-Fi or LAN can access:
 
----
+```
+http://<YOUR_PC_IP>:7860
+```
 
-## 🖥️ UI Walkthrough
-
-### 🎙️ Speaker Tab
-
-* Start/Stop streaming microphone audio
-* Sends 2-second chunks to the backend
-* Backend returns transcriptions and broadcasts them to viewers
-
-### 📺 Viewer Tab
-
-* Displays captions in real-time
-* Save current session captions to CSV
-* Clear live captions
+To find your IP:
+```bash
+ipconfig  # on Windows
+ifconfig | grep inet  # on Mac/Linux
+```
 
 ---
 
-## 🧠 Model Info
+## 📦 Output
 
-* Model used: `small.en` (244 MB) by default
-* Can be changed in `transcriber.py` via `MODEL_NAME = "base.en"` or others
-* Runs on **CPU** or **CUDA GPU** (auto-configurable)
-
----
-
-## 📁 Output
-
-Saved captions are stored in:
-
+Captions are saved in:
 ```
 frontend/saved_captions/database.csv
 ```
 
-With format:
+---
 
-```csv
-timestamp,caption
-2025-07-03 22:15:12,"Hello everyone, welcome to the session..."
-```
+## 🛠 Developer Notes
+
+- Built with `Gradio`, `FastAPI`, `WebSockets`, `sounddevice`, and `whisper.cpp`/compatible backends.
+- Make sure your microphone input is working correctly.
 
 ---
 
-## 🛠️ TODO / Ideas
+## 🧪 TODOs / Ideas
 
-* Add language selector for multi-lingual support
-* Allow saving .txt or .srt format
-* Improve noise filtering for better accuracy
-* Add client authentication for viewer tab
+- [ ] Add speaker diarization
+- [ ] Integrate Hugging Face Whisper model as fallback
+- [ ] Optional cloud caption sync
+- [ ] Better error handling / UI alerts
 
 ---
 
 ## 📄 License
 
-MIT License © 2025 Hardik Chhipa
+MIT — feel free to use, modify, and share!
 
 ---
 
-## 🙏 Acknowledgements
+## 🙌 Acknowledgements
 
-* [Gradio](https://www.gradio.app/)
-* [FastAPI](https://fastapi.tiangolo.com/)
-* [Faster-Whisper](https://github.com/guillaumekln/faster-whisper)
-* [pydub](https://github.com/jiaaro/pydub)
-
-```
-
-Let me know if you'd like me to automatically insert your GitHub repo link in this `README.md`.
-```
+Thanks to [OpenAI Whisper](https://github.com/openai/whisper), [Gradio](https://www.gradio.app/), and [FastAPI](https://fastapi.tiangolo.com/) for the amazing tools.
